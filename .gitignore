@@ -1,0 +1,65 @@
+# .gitignore for Sign Language Detection Project
+
+# Python cache
+__pycache__/
+*.py[cod]
+*$py.class
+*.so
+.Python
+
+# Virtual environments
+venv/
+env/
+ENV/
+.venv
+
+# Data files
+data/raw/**/*.jpg
+data/raw/**/*.jpeg
+data/raw/**/*.png
+data/raw/**/*.zip
+data/processed/*.npy
+
+# Model files (too large for git)
+models/*.h5
+models/*.keras
+models/*.pb
+
+# Logs
+logs/**/*.log
+logs/**/*.csv
+logs/**/events.out.tfevents.*
+
+# Jupyter Notebooks
+.ipynb_checkpoints/
+*.ipynb
+
+# IDE
+.vscode/
+.idea/
+*.swp
+*.swo
+*~
+
+# OS
+.DS_Store
+Thumbs.db
+desktop.ini
+
+# User data
+contacts.json
+conversation_history.json
+quick_phrases.json
+
+# Kaggle
+.kaggle/
+
+# TensorFlow
+*.ckpt
+checkpoint
+
+# Keep directory structure
+!data/raw/.gitkeep
+!data/processed/.gitkeep
+!models/.gitkeep
+!logs/.gitkeep
