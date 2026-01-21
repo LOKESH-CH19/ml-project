@@ -3,3 +3,5 @@ streamlit-webrtc
 mediapipe
 opencv-python-headless
 av
+tensorflow
+numpy
