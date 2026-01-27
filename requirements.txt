@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 tensorflow>=2.16.1
 opencv-python>=4.8.1.78
 mediapipe>=0.10.9
@@ -8,3 +9,12 @@ scikit-learn>=1.3.2
 pyttsx3>=2.90
 pillow>=10.1.0
 tqdm>=4.66.1
+=======
+streamlit
+streamlit-webrtc
+mediapipe>=0.10.0
+opencv-python-headless
+av
+tensorflow
+numpy
+>>>>>>> 830c4bec0c93cbe2a6dad5f110f96198036e598d
