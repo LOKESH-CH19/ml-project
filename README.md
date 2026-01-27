@@ -6,14 +6,14 @@ A comprehensive real-time American Sign Language (ASL) detection system using de
 
 ### Core Detection
 - **Real-time ASL recognition** using webcam with 99.43%+ accuracy
-- **39 gesture classes**: 26 letters (A-Z) + 10 numbers (0-9) + 3 control gestures
+- **39 gesture classes**: 26 letters (A-Z) + 10 numbers (0-9) + 4 control gestures
 - **MediaPipe hand tracking** with 21 landmark detection
 - **Smart hold detection** (1.5s hold requirement to prevent false triggers)
 - **Adjustable hold time** (0.5-3.0 seconds customizable)
 
 ### Smart Typing Features
 - **Auto-capitalization** (first letter of sentences)
-- **Word prediction** with 3 smart suggestions
+- **Word prediction** with 300+ common words and 3 smart suggestions
 - **Quick phrases** (0-9 hotkeys for common sentences)
 - **Undo button** for instant corrections
 - **Contact management** (save up to 20 contacts)
@@ -85,20 +85,23 @@ The system recognizes all American Sign Language alphabet signs:
 | **8** | Middle and thumb touch, other fingers up | 🤌 |
 | **9** | Index and thumb touch, other fingers up | 👌 |
 
-### Control Gestures - 3 Classes
+### Control Gestures - 4 Classes
 
 | Gesture | Action | Description | Usage |
 |---------|--------|-------------|-------|
 | **space** | Add Space | Open palm facing camera (like waving) | 🤚 Separates words |
 | **del** | Backspace | Special deletion gesture from dataset | ⬅️ Remove last character |
 | **nothing** | Send/Speak | No hand visible in frame | 🔊 Speak message via TTS |
+| **Y** | Mode Switch | "Hang loose" sign (pinky and thumb extended) | 🤙 Toggle ABC ↔ 123 modes |
 
 ### Mode Switching
 
 **Switch between Letter and Number modes:**
-- Show **"0"** gesture twice quickly (within 2 seconds)
+- Show the **"Y"** gesture (hang loose sign: pinky and thumb out, other fingers tucked)
+- Hold for 1.5 seconds to toggle modes
 - **Letter Mode (ABC)**: Blue indicator - types A-Z letters
 - **Number Mode (123)**: Orange indicator - types 0-9 numbers
+- The Y gesture is dual-purpose: acts as control for mode switching, not typed as letter
 
 ## 🎯 How to Use
 
@@ -146,6 +149,11 @@ python app.py
 1. Remove your hand from view ("nothing" gesture)
 2. Hold hand away for 1.5 seconds
 3. Text-to-speech reads your message aloud
+
+**Switch Modes (ABC ↔ 123):**
+1. Show "Y" gesture (hang loose: 🤙 pinky and thumb extended)
+2. Hold for 1.5 seconds
+3. Mode indicator toggles between blue (ABC) and orange (123)
 
 #### 6. **Quick Features**
 

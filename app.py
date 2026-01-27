@@ -589,12 +589,88 @@ class SignLanguageApp:
             self.typing_engine.set_text(new_text)
     
     def update_word_suggestions(self, text):
-        """Update word prediction suggestions"""
+        """Update word prediction suggestions with comprehensive dictionary"""
+        # Comprehensive common words dictionary (300+ words)
         common_words = [
-            "hello", "thank", "you", "please", "help", "yes", "no",
-            "good", "morning", "afternoon", "evening", "night",
-            "how", "are", "fine", "okay", "sorry", "excuse", "me",
-            "welcome", "goodbye", "see", "later", "understand"
+            # Greetings & Courtesy (20)
+            "hello", "hi", "hey", "goodbye", "bye", "thanks", "thank", "you", 
+            "please", "sorry", "excuse", "me", "welcome", "pardon",
+            "greetings", "howdy", "cheers", "farewell", "later", "goodnight",
+            
+            # Common verbs (40)
+            "are", "is", "am", "was", "were", "be", "been", "have", "has", "had",
+            "do", "does", "did", "can", "could", "will", "would", "should",
+            "may", "might", "must", "go", "going", "went", "come", "coming",
+            "get", "got", "make", "made", "take", "took", "see", "saw", "know",
+            "think", "want", "need", "help", "like", "love", "feel",
+            
+            # Time & Days (25)
+            "time", "today", "tomorrow", "yesterday", "now", "later", "soon",
+            "monday", "tuesday", "wednesday", "thursday", "friday", "saturday", "sunday",
+            "morning", "afternoon", "evening", "night", "day", "week", "month",
+            "year", "hour", "minute", "second",
+            
+            # Questions (25)
+            "what", "when", "where", "who", "why", "which", "how", "whose",
+            "whom", "question", "answer", "ask", "tell", "said", "say",
+            "mean", "means", "understand", "explain", "repeat", "again",
+            "know", "wondering", "curious", "confused",
+            
+            # Emotions & States (30)
+            "good", "great", "fine", "okay", "bad", "terrible", "happy", "sad",
+            "angry", "mad", "glad", "excited", "bored", "tired", "sick",
+            "hungry", "thirsty", "full", "empty", "ready", "busy", "free",
+            "hot", "cold", "warm", "cool", "better", "worse", "best", "worst",
+            
+            # People & Relationships (20)
+            "person", "people", "family", "friend", "mother", "father", "mom",
+            "dad", "brother", "sister", "child", "baby", "adult", "man",
+            "woman", "boy", "girl", "doctor", "teacher", "student",
+            
+            # Places (25)
+            "home", "house", "work", "school", "hospital", "store", "shop",
+            "restaurant", "cafe", "bank", "office", "room", "bathroom",
+            "kitchen", "bedroom", "place", "here", "there", "where",
+            "city", "town", "country", "world", "street", "road",
+            
+            # Common nouns (30)
+            "thing", "things", "something", "nothing", "everything", "anything",
+            "water", "food", "drink", "eat", "money", "phone", "computer",
+            "car", "bus", "train", "bike", "book", "paper", "pen", "pencil",
+            "table", "chair", "door", "window", "bed", "tv", "radio",
+            "bag", "clothes",
+            
+            # Actions & Activities (35)
+            "call", "text", "message", "talk", "speak", "listen", "hear",
+            "watch", "look", "read", "write", "study", "learn", "teach",
+            "work", "play", "rest", "sleep", "wake", "eat", "drink",
+            "walk", "run", "sit", "stand", "lie", "drive", "ride",
+            "buy", "sell", "pay", "give", "receive", "send", "open", "close",
+            
+            # Numbers & Quantities (15)
+            "one", "two", "three", "four", "five", "six", "seven", "eight",
+            "nine", "ten", "many", "much", "some", "few", "lot",
+            
+            # Adjectives (25)
+            "big", "small", "large", "little", "tall", "short", "long",
+            "new", "old", "young", "fast", "slow", "quick", "easy", "hard",
+            "difficult", "simple", "nice", "beautiful", "ugly", "clean",
+            "dirty", "right", "wrong", "correct",
+            
+            # Prepositions & Connectors (20)
+            "the", "and", "but", "or", "so", "if", "because", "for", "with",
+            "without", "about", "from", "into", "through", "during",
+            "before", "after", "between", "among", "while",
+            
+            # Medical & Health (15)
+            "hurt", "pain", "medicine", "pill", "doctor", "nurse", "hospital",
+            "sick", "ill", "healthy", "emergency", "urgent", "appointment",
+            "prescription", "treatment",
+            
+            # Technology (15)
+            "phone", "call", "text", "email", "internet", "wifi", "computer",
+            "laptop", "tablet", "app", "website", "online", "offline",
+            "charge", "battery"
         ]
         
         words = text.lower().split()
@@ -604,8 +680,11 @@ class SignLanguageApp:
             return
         
         last_word = words[-1] if words else ""
+        
+        # Find matching words (up to 3)
         suggestions = [w for w in common_words if w.startswith(last_word) and w != last_word][:3]
         
+        # Update buttons
         for i, btn in enumerate(self.suggestion_buttons):
             if i < len(suggestions):
                 btn.config(text=suggestions[i], state=tk.NORMAL)

@@ -25,20 +25,21 @@ NUMBERS_PATH = os.path.join(RAW_DATA_DIR, 'asl_numbers', 'American Sign Language
 CONTROL_GESTURES_PATH = os.path.join(RAW_DATA_DIR, 'control_gestures')
 
 # Gesture classes
-LETTERS = list('ABCDEFGHIJKLMNOPQRSTUVWXYZ')
+LETTERS = list('ABCDEFGHIJKLMNOPQRSTUVWXYZ')  # All 26 letters (Y dual-use for mode switch)
 NUMBERS = list('0123456789')
 
 # Map existing dataset gestures to control functions
-# The ASL alphabet dataset includes: 'del', 'space', 'nothing'
+# The ASL alphabet dataset includes: 'del', 'space', 'nothing' + we use 'Y' for mode
 CONTROL_MAPPINGS = {
-    'space': 'SPACE',      # Space between words (from dataset)
-    'del': 'BACKSPACE',    # Delete/backspace (from dataset)  
-    'nothing': 'SEND',     # No gesture = send message (from dataset)
+    'space': 'SPACE',         # Space between words (from dataset)
+    'del': 'BACKSPACE',       # Delete/backspace (from dataset)  
+    'nothing': 'SEND',        # Speak message (no hand visible)
+    'Y': 'MODE_SWITCH',       # Y gesture (hang loose) switches ABC ↔ 123
 }
 
 # We'll use these existing gestures as controls
-CONTROLS = list(CONTROL_MAPPINGS.keys())  # ['space', 'del', 'nothing']
-CONTROL_ACTIONS = list(CONTROL_MAPPINGS.values())  # ['SPACE', 'BACKSPACE', 'SEND']
+CONTROLS = ['space', 'del', 'nothing']  # Y is in LETTERS but acts as control when detected
+CONTROL_ACTIONS = list(CONTROL_MAPPINGS.values())  # ['SPACE', 'BACKSPACE', 'SEND', 'MODE_SWITCH']
 
 ALL_CLASSES = LETTERS + NUMBERS + CONTROLS
 NUM_CLASSES = len(ALL_CLASSES)
@@ -66,8 +67,8 @@ MODES = {
     'NUMBER': {'classes': NUMBERS, 'display': '123'},
 }
 
-# Simplified mode switching: Use number '0' twice to switch modes
-MODE_SWITCH_GESTURE = '0'
+# Send gesture - use the Speak button instead
+# Mode switch gesture - "nothing" (no hand visible)
 
 # Quick Phrases
 DEFAULT_QUICK_PHRASES = [

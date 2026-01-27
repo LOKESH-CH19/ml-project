@@ -153,6 +153,12 @@ class SmartTypingEngine:
         elif action == 'SEND':
             return True, 'SEND'
         
+        elif action == 'MODE_SWITCH':
+            # Switch between LETTER and NUMBER modes
+            new_mode = self.switch_mode()
+            self.gesture_history.append(('CONTROL', 'MODE_SWITCH'))
+            return True, f'MODE_SWITCH_{new_mode}'
+        
         return False, None
     
     def process_detection(self, detected_class, confidence):
@@ -179,8 +185,14 @@ class SmartTypingEngine:
             result['hold_progress'] = self.get_hold_progress()
             return result
         
+        # Check if Y gesture is used for mode switching (prioritize over letter Y)
+        if detected_class == 'Y':
+            success, action = self.process_control('Y')
+            result['success'] = success
+            result['action'] = action
+        
         # Process based on mode and class
-        if detected_class in config.CONTROLS:
+        elif detected_class in config.CONTROLS:
             success, action = self.process_control(detected_class)
             result['success'] = success
             result['action'] = action
